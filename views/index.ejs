@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Oportunidades</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .sidebar {
+    height: 100%;
+    width: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa;
+    padding-top: 21px;
+    border-right: 4px solid #df6706;
+    transition: width 0.3s;
+}
+
+.sidebar a {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+    color: #df6706;
+}
+
+.sidebar a.active {
+    background-color: #df6706;
+    color: white;
+}
+
+.sidebar .user-profile {
+    position: relative;
+    bottom: 20px;
+    width: 100%;
+}
+
+        
+        .container {
+            width: calc(100% - 100px);
+            margin-left: 100px;
+            padding: 15px;
+        }
+        
+        .title {
+            color: #f26e0f;
+            font-size: 2.5em;
+            margin-top: 50px;
+        }
+        
+        .subtitle {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+        
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 20%;
+            height: 40%;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .card h3 {
+            margin: 15px;
+            color: #333;
+        }
+        
+        .card p {
+            margin: 0 15px 15px;
+            color: #666;
+        }
+        
+        .card button {
+            margin: 15px;
+            background-color: #f26e0f;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .card button:hover {
+            background-color: #d45a0a;
+            transform: scale(1.05);
+        }
+        
+        .preinscripcion {
+            margin: 40px 0;
+        }
+        
+        .preinscripcion button {
+            background-color: #f26e0f;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .preinscripcion button:hover {
+            background-color: #d45a0a;
+            transform: scale(1.05);
+        }
+        
+        .side-menu {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f26e0f;
+            padding: 10px 20px;
+            color: white;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo {
+    max-width: 50px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right h5 {
+    margin-bottom: 5px;
+}
+
+.footer-bottom {
+    border-top: 5px solid #565e64;
+    padding-top: 5px;
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left {
+        margin-bottom: 5px;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
+}
+.login-section {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-button {
+    background-color: #f26e0f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 80%; /* Ajusta el tamaño del botón */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+}
+
+.login-button:hover {
+    background-color: #d45a0a;
+    transform: scale(1.05);
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="dropdown">
+            <a href="/" title="home" class="<%= (activePage ==! 'indexevent' || 'indexpatent' || 'indexexpert'  ) ? 'active' : '' %>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M2.5 9H21.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M6.99981 6H7.00879" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10.9998 6H11.0088" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
+        <a href="/indexevent" title="Eventos" class="<%= (activePage === 'indexevent') ? 'active' : '' %>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M19 10.5V10C19 6.22876 19 4.34315 17.8284 3.17157C16.6569 2 14.7712 2 11 2C7.22876 2 5.34315 2 4.17157 3.17157C3 4.34315 3 6.22876 3 10V16C3 17.8638 3 18.7956 3.30448 19.5307C3.71046 20.5108 4.48915 21.2895 5.46927 21.6955C6.20435 22 7.13623 22 9 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7 7H15M7 11H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M15.2825 19.0044C15.2235 18.1157 15.118 17.1658 14.6817 16.0917C14.3095 15.1756 14.4132 13.0205 16.5 13.0205C18.5868 13.0205 18.6664 15.1756 18.2942 16.0917C17.8578 17.1658 17.7765 18.1157 17.7175 19.0044M21 22H12V20.7543C12 20.3078 12.2664 19.9154 12.6528 19.7928L14.9076 19.077C15.0684 19.0259 15.2348 19 15.4021 19H17.5979C17.7652 19 17.9316 19.0259 18.0924 19.077L20.3472 19.7928C20.7336 19.9154 21 20.3078 21 20.7543V22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
+        <a href="/indexpatent" title="Patentes" class="<%= (activePage === 'indexpatent') ? 'active' : '' %>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M2 18C2 16.4596 2 15.6893 2.34673 15.1235C2.54074 14.8069 2.80693 14.5407 3.12353 14.3467C3.68934 14 4.45956 14 6 14C7.54044 14 8.31066 14 8.87647 14.3467C9.19307 14.5407 9.45926 14.8069 9.65327 15.1235C10 15.6893 10 16.4596 10 18C10 19.5404 10 20.3107 9.65327 20.8765C9.45926 21.1931 9.19307 21.4593 8.87647 21.6533C8.31066 22 7.54044 22 6 22C4.45956 22 3.68934 22 3.12353 21.6533C2.80693 21.4593 2.54074 21.1931 2.34673 20.8765C2 20.3107 2 19.5404 2 18Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M14 18C14 16.4596 14 15.6893 14.3467 15.1235C14.5407 14.8069 14.8069 14.5407 15.1235 14.3467C15.6893 14 16.4596 14 18 14C19.5404 14 20.3107 14 20.8765 14.3467C21.1931 14.5407 21.4593 14.8069 21.6533 15.1235C22 15.6893 22 16.4596 22 18C22 19.5404 22 20.3107 21.6533 20.8765C21.4593 21.1931 21.1931 21.4593 20.8765 21.6533C20.3107 22 19.5404 22 18 22C16.4596 22 15.6893 22 15.1235 21.6533C14.8069 21.4593 14.5407 21.1931 14.3467 20.8765C14 20.3107 14 19.5404 14 18Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M2 6C2 4.45956 2 3.68934 2.34673 3.12353C2.54074 2.80693 2.80693 2.54074 3.12353 2.34673C3.68934 2 4.45956 2 6 2C7.54044 2 8.31066 2 8.87647 2.34673C9.19307 2.54074 9.45926 2.80693 9.65327 3.12353C10 3.68934 10 4.45956 10 6C10 7.54044 10 8.31066 9.65327 8.87647C9.45926 9.19307 9.19307 9.45926 8.87647 9.65327C8.31066 10 7.54044 10 6 10C4.45956 10 3.68934 10 3.12353 9.65327C2.80693 9.45926 2.54074 9.19307 2.34673 8.87647C2 8.31066 2 7.54044 2 6Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M14 6C14 4.45956 14 3.68934 14.3467 3.12353C14.5407 2.80693 14.8069 2.54074 15.1235 2.34673C15.6893 2 16.4596 2 18 2C19.5404 2 20.3107 2 20.8765 2.34673C21.1931 2.54074 21.4593 2.80693 21.6533 3.12353C22 3.68934 22 4.45956 22 6C22 7.54044 22 8.31066 21.6533 8.87647C21.4593 9.19307 21.1931 9.45926 20.8765 9.65327C20.3107 10 19.5404 10 18 10C16.4596 10 15.6893 10 15.1235 9.65327C14.8069 9.45926 14.5407 9.19307 14.3467 8.87647C14 8.31066 14 7.54044 14 6Z" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+        </a>
+        <div class="user-profile">
+            <a href="/indexexpert" title="Expertos" <%= (activePage === 'indexexpert') ? 'active' : '' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                    <path d="M7.78256 17.1112C6.68218 17.743 3.79706 19.0331 5.55429 20.6474C6.41269 21.436 7.36872 22 8.57068 22H15.4293C16.6313 22 17.5873 21.436 18.4457 20.6474C20.2029 19.0331 17.3178 17.743 16.2174 17.1112C13.6371 15.6296 10.3629 15.6296 7.78256 17.1112Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15.5 10C15.5 11.933 13.933 13.5 12 13.5C10.067 13.5 8.5 11.933 8.5 10C8.5 8.067 10.067 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10Z" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M2.854 16C2.30501 14.7664 2 13.401 2 11.9646C2 6.46129 6.47715 2 12 2C17.5228 2 22 6.46129 22 11.9646C22 13.401 21.695 14.7664 21.146 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+            </a>
+          </div> 
+            <a href="/indexlogin" title="Iniciar Sesion" <%= (activePage === 'indexexpert') ? 'active' : '' %>">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                    <path d="M5.78256 17.1112C6.68218 17.743 3.79706 19.0331 5.55429 20.6474C6.41269 21.436 7.36872 22 8.57068 22H15.4293C16.6313 22 17.5873 21.436 18.4457 20.6474C20.2029 19.0331 17.3178 17.743 16.2174 17.1112C13.6371 15.6296 10.3629 15.6296 7.78256 17.1112Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M1 10C15.5 11.933 56.933 13.5 12 13.5C10.067 13.5 8.5 11.933 8.5 10C8.5 8.067 10.067 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10Z" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M3.854 16C2.30501 14.7664 2 13.401 2 11.9646C2 6.46129 6.47715 2 12 2C17.5228 2 22 6.46129 22 11.9646C22 13.401 21.695 14.7664 21.146 16" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+            </a>       
+        </div>
+     </div>
+
+    <div class="container">
+        <h1 class="title">Modulo Oportunidades</h1>
+        <p class="subtitle">Conoce toda la oferta de manejo de oportunidades</p>
+        <div class="cards">
+            <div class="card">
+                <div>
+                    <img src="<%= imagexperto %>" alt="Logo" class="logo" style="height: 120px;">
+                </div>
+                <h3>Expertos</h3>
+                <p>Descripción breve sobre los expertos disponibles.</p>
+                <button onclick="window.location.href='/indexexpert'">Ver más</button>
+            </div>
+            <div class="card">
+                <div>
+                    <img src="<%= imagdocumento %>" alt="Logo" class="logo" style="height: 120px;">
+                </div>
+                <h3>Eventos</h3>
+                <p>Información sobre las ferias para exposicion de oportunidades.</p>
+                <button onclick="window.location.href='/indexevent'">Ver más</button>
+            </div>
+            <div class="card">
+                <div>
+                    <img src="<%= imagexposicion %>" alt="Logo" class="logo" style="height: 120px;">
+                </div>
+                <h3>Patentes</h3>
+                <p>Detalles sobre las patentes y PI de los expertos.</p>
+                <button onclick="window.location.href='/indexpatent'">Ver más</button>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <div class="footer-content container d-flex justify-content-between align-items-center">
+        <div class="footer-left d-flex align-items-center">
+            <img src="imags/logo-aim.png" alt="Logo" class="footer-logo">
+            <p class="mb-0 ml-3">Acreditación Institucional Multicampus de Alta Calidad</p>
+        </div>
+        <div class="footer-right text-right">
+            <h5 class="mb-1">Sedes</h5>
+            <p class="mb-0">Medellín: Carrera 56C Nº 51-110</p>
+            <p class="mb-0">Bello: Calle 45 Nº 61-40 Barrio Salento</p>
+            <p class="mb-0">Notificaciones judiciales: <a href="mailto:notificaciones.judiciales@usbmed.edu.co">notificaciones.judiciales@usbmed.edu.co</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom text-center mt-3">
+        <p class="mb-0">&copy; 2023 Universidad de San Buenaventura, Sede Medellín - Políticas de privacidad - Términos y Condiciones</p>
+        <p class="mb-0">Institución de educación superior sujeta a la inspección y vigilancia del Ministerio de Educación Nacional</p>
+    </div>
+</footer>
+
+
+</html>
+

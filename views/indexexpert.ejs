@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modulo Oportunidades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            min-height: 95vh;
+            display: block;
+            flex-direction: column;
+        }
+        
+        .jumbotron {
+            background: linear-gradient(to right, #df6706, #000102b2);
+            color: #fff;
+            padding: 2rem 2rem;
+            margin-bottom: 0;
+        }
+        
+        .jumbotron-heading {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #000102;
+        }
+        
+        .jumbotron-subtitle {
+            color: #000000;
+        }
+        
+        .container.d-flex.align-items-center {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            height: 100px;
+        }
+        
+        .album {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            flex: 1;
+        }
+        .container {
+                    width: calc(100% - 100px);
+                    margin-left: 100px;
+                    padding: 15px;
+                }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            width:90%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            border: 1px solid #000000;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-body {
+            background-color: #e2e2e2;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .card-text {
+            color: #000000;
+            font-size: 1rem;
+        }
+        
+        .btn-outline-secondary {
+            border-radius: 20px;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: #df6706;
+            color: white;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .float-right a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .float-right a:hover {
+            text-decoration: underline;
+        }
+        
+       /* Ajusta la altura del modal */
+       .modal-full-width {
+    width: 100%;
+    height: 95%; /* Ajusta esta propiedad a la altura deseada */
+    position: fixed;
+    top: 5%; /* Ajusta la posición superior si quieres centrar verticalmente */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Estilos para los inputs del formulario */
+.modal-body .form-control {
+    border-radius: 10px;
+    border: 1px solid #df6706;
+}
+
+.modal-body .form-label {
+    font-weight: bold;
+    color: hsl(24, 100%, 46%);
+}
+.modal-dialog-full-width {
+      max-width: 100%;
+      margin: 0;
+    }
+        
+        .modal-header, .modal-footer {
+            border: none;
+            background: #343a40;
+            color: #fff;
+            padding: 1rem;
+        }
+        
+        .modal-title {
+            font-weight: bold;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        
+        .modal-body .form-label {
+            font-weight: bold;
+            color: hsl(24, 100%, 46%);
+        }
+        
+        .modal-body .form-control {
+            border-radius: 10px;
+            border: 1px solid #df6706;
+        }
+        
+        .modal-footer .btn-primary {
+            background: #df6706;
+            border-color: #df6706;
+        }
+        
+        .modal-footer .btn-primary:hover {
+            background: #df6706;
+            border-color: #0d0d0e;
+        }
+        
+        .modal-footer .btn-secondary {
+            background: #343a40;
+            border-color: #343a40;
+        }
+        
+        .modal-footer .btn-secondary:hover {
+            background: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .modal-small-text {
+            font-size: 0.9em;
+        }
+        
+        .modal-content .form-label,
+        .modal-content .form-control {
+            font-size: 0.8em;
+        }
+        
+        .modal-body .col-md-6 {
+            flex: 2;
+            min-width: 30%;
+        }
+        
+        .sidebar {
+            height: 100%;
+            width: 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 21px;
+            border-right: 4px solid #df6706;
+            transition: width 0.3s;
+        }
+        
+        .sidebar a {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .sidebar a:hover {
+            background-color: #ddd;
+            color: #df6706;
+        }
+        
+        .sidebar a.active {
+            background-color: #df6706;
+            color: white;
+        }
+        
+        .sidebar .user-profile {
+            position: relative;
+            bottom: 20px;
+            width: 100%;
+        }
+        
+        .event-step {
+            padding: 15px;
+        }
+        
+        .event-step-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .btn-primary {
+            background-color: #df6706;
+            border-color: #df6706;
+        }
+        
+        .btn-primary:hover {
+            background-color: #df6706;
+            border-color: #df6706;
+        }
+        
+        .btn-secondary {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            max-width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        .footer-right h5 {
+            margin-bottom: 5px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #565e64;
+            padding-top: 5px;
+        }
+        
+        .footer-bottom p {
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            .footer-left {
+                margin-bottom: 10px;
+            }
+        
+            .footer-right {
+                text-align: center;
+            }
+        }
+        .expert-step-icon {
+    width: 150px;  /* Cambia esto al tamaño deseado */
+    height:150px; /* Cambia esto al tamaño deseado */
+    margin-right: 15px;
+}
+        
+        </style>
+    
+</head>
+<body>
+
+
+<div class="modal fade" id="expertStepsModal" tabindex="-1" aria-labelledby="expertStepsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expertStepsModalLabel">Bienvenido al Módulo de Expertos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-around mb-4">
+            <button class="btn btn-primary" onclick="showExpertStep('student')">Información para Estudiantes</button>
+            <button class="btn btn-secondary" onclick="showExpertStep('expert')">Información para Expertos</button>
+          </div>
+          <div id="expertStepContent">
+            <!-- Información para Estudiantes -->
+            <div class="expert-step" id="studentStep" style="display: none;">
+              <div class="d-flex align-items-center">
+                <img src="imags/iconevent3.jpg" alt="Icono Estudiante" class="expert-step-icon">
+                <div>
+                  <h6>Información para Estudiantes</h6>
+                  <p>En este módulo puede encontrar a los expertos disponibles para asesorar en proyectos universitarios. Aquí encontrará detalles como el nombre, especialidad, rol y datos de contacto de cada experto.</p>
+                  <p>Consejo: Prepare un resumen de su proyecto y preguntas específicas para aprovechar al máximo la asesoría del experto.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Información para Expertos -->
+            <div class="expert-step" id="expertStep" style="display: none;">
+              <div class="d-flex align-items-center">
+                <div class="expert-icon-container">
+                  <img src="imags/iconevent4.jpg" alt="Icono Bienvenido Experto" class="expert-step-icon">
+                </div>
+                <div class="expert-content">
+                  <h6 class="expert-title">Bienvenido Experto</h6>
+                  <p class="expert-description">Registra todos los campos necesarios para que los estudiantes puedan contar con tu apoyo y experiencia en sus proyectos.</p>
+                  <p class="expert-advice">Consejo: Asegúrate de mantener tu perfil actualizado con información detallada sobre tus especialidades y áreas de experiencia para que los estudiantes puedan encontrarte fácilmente.</p>
+                  <ul class="expert-tips">
+                    <li>Completa todos los campos obligatorios.</li>
+                    <li>Proporciona una descripción detallada de tus habilidades y experiencia.</li>
+                    <li>Incluye información de contacto precisa para facilitar la comunicación.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeExpertModal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Finished bienvenida-->
+
+
+<div class="sidebar">
+    <div class="dropdown">
+        <a href="/" title="home" class="<%= (activePage === '/'  ) ? 'active' : '' %>">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+            <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M2.5 9H21.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M6.99981 6H7.00879" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M10.9998 6H11.0088" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+    <a href="/indexevent" title="Eventos" class="<%= (activePage === 'indexevent') ? 'active' : '' %>">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+            <path d="M19 10.5V10C19 6.22876 19 4.34315 17.8284 3.17157C16.6569 2 14.7712 2 11 2C7.22876 2 5.34315 2 4.17157 3.17157C3 4.34315 3 6.22876 3 10V16C3 17.8638 3 18.7956 3.30448 19.5307C3.71046 20.5108 4.48915 21.2895 5.46927 21.6955C6.20435 22 7.13623 22 9 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M7 7H15M7 11H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M15.2825 19.0044C15.2235 18.1157 15.118 17.1658 14.6817 16.0917C14.3095 15.1756 14.4132 13.0205 16.5 13.0205C18.5868 13.0205 18.6664 15.1756 18.2942 16.0917C17.8578 17.1658 17.7765 18.1157 17.7175 19.0044M21 22H12V20.7543C12 20.3078 12.2664 19.9154 12.6528 19.7928L14.9076 19.077C15.0684 19.0259 15.2348 19 15.4021 19H17.5979C17.7652 19 17.9316 19.0259 18.0924 19.077L20.3472 19.7928C20.7336 19.9154 21 20.3078 21 20.7543V22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+    <a href="/indexpatent" title="Patentes" class="<%= (activePage === 'indexpatent') ? 'active' : '' %>">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+            <path d="M2 18C2 16.4596 2 15.6893 2.34673 15.1235C2.54074 14.8069 2.80693 14.5407 3.12353 14.3467C3.68934 14 4.45956 14 6 14C7.54044 14 8.31066 14 8.87647 14.3467C9.19307 14.5407 9.45926 14.8069 9.65327 15.1235C10 15.6893 10 16.4596 10 18C10 19.5404 10 20.3107 9.65327 20.8765C9.45926 21.1931 9.19307 21.4593 8.87647 21.6533C8.31066 22 7.54044 22 6 22C4.45956 22 3.68934 22 3.12353 21.6533C2.80693 21.4593 2.54074 21.1931 2.34673 20.8765C2 20.3107 2 19.5404 2 18Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M14 18C14 16.4596 14 15.6893 14.3467 15.1235C14.5407 14.8069 14.8069 14.5407 15.1235 14.3467C15.6893 14 16.4596 14 18 14C19.5404 14 20.3107 14 20.8765 14.3467C21.1931 14.5407 21.4593 14.8069 21.6533 15.1235C22 15.6893 22 16.4596 22 18C22 19.5404 22 20.3107 21.6533 20.8765C21.4593 21.1931 21.1931 21.4593 20.8765 21.6533C20.3107 22 19.5404 22 18 22C16.4596 22 15.6893 22 15.1235 21.6533C14.8069 21.4593 14.5407 21.1931 14.3467 20.8765C14 20.3107 14 19.5404 14 18Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M2 6C2 4.45956 2 3.68934 2.34673 3.12353C2.54074 2.80693 2.80693 2.54074 3.12353 2.34673C3.68934 2 4.45956 2 6 2C7.54044 2 8.31066 2 8.87647 2.34673C9.19307 2.54074 9.45926 2.80693 9.65327 3.12353C10 3.68934 10 4.45956 10 6C10 7.54044 10 8.31066 9.65327 8.87647C9.45926 9.19307 9.19307 9.45926 8.87647 9.65327C8.31066 10 7.54044 10 6 10C4.45956 10 3.68934 10 3.12353 9.65327C2.80693 9.45926 2.54074 9.19307 2.34673 8.87647C2 8.31066 2 7.54044 2 6Z" stroke="currentColor" stroke-width="1.5" />
+            <path d="M14 6C14 4.45956 14 3.68934 14.3467 3.12353C14.5407 2.80693 14.8069 2.54074 15.1235 2.34673C15.6893 2 16.4596 2 18 2C19.5404 2 20.3107 2 20.8765 2.34673C21.1931 2.54074 21.4593 2.80693 21.6533 3.12353C22 3.68934 22 4.45956 22 6C22 7.54044 22 8.31066 21.6533 8.87647C21.4593 9.19307 21.1931 9.45926 20.8765 9.65327C20.3107 10 19.5404 10 18 10C16.4596 10 15.6893 10 15.1235 9.65327C14.8069 9.45926 14.5407 9.19307 14.3467 8.87647C14 8.31066 14 7.54044 14 6Z" stroke="currentColor" stroke-width="1.5" />
+        </svg>
+    </a>
+    <div class="user-profile">
+        <a href="/indexexpert" title="Expertos" class="<%= (activePage === 'indexexpert') ? 'active' : '' %>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M7.78256 17.1112C6.68218 17.743 3.79706 19.0331 5.55429 20.6474C6.41269 21.436 7.36872 22 8.57068 22H15.4293C16.6313 22 17.5873 21.436 18.4457 20.6474C20.2029 19.0331 17.3178 17.743 16.2174 17.1112C13.6371 15.6296 10.3629 15.6296 7.78256 17.1112Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.5 10C15.5 11.933 13.933 13.5 12 13.5C10.067 13.5 8.5 11.933 8.5 10C8.5 8.067 10.067 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M2.854 16C2.30501 14.7664 2 13.401 2 11.9646C2 6.46129 6.47715 2 12 2C17.5228 2 22 6.46129 22 11.9646C22 13.401 21.695 14.7664 21.146 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+        </a>
+      </div> 
+        <a href="/indexlogin" title="Iniciar Sesion" <%= (activePage === 'indexexpert') ? 'active' : '' %>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M5.78256 17.1112C6.68218 17.743 3.79706 19.0331 5.55429 20.6474C6.41269 21.436 7.36872 22 8.57068 22H15.4293C16.6313 22 17.5873 21.436 18.4457 20.6474C20.2029 19.0331 17.3178 17.743 16.2174 17.1112C13.6371 15.6296 10.3629 15.6296 7.78256 17.1112Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M1 10C15.5 11.933 56.933 13.5 12 13.5C10.067 13.5 8.5 11.933 8.5 10C8.5 8.067 10.067 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M3.854 16C2.30501 14.7664 2 13.401 2 11.9646C2 6.46129 6.47715 2 12 2C17.5228 2 22 6.46129 22 11.9646C22 13.401 21.695 14.7664 21.146 16" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+        </a>       
+    </div>
+ </div>
+
+
+ 
+   <section class="jumbotron text-center">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div>
+            <img src="<%= logoPath %>" alt="Logo" class="logo" style="height: 120px;">
+        </div>
+        <div class="mx-auto text-center">
+            <h1 class="jumbotron-heading">Expertos</h1>
+            <p class="jumbotron-subtitle">El Experto indicado para su proyecto </p>
+            <button class="btn btn-primary" onclick="showCreateExpertModal()">Crear Experto</button>
+        </div>
+    </div>
+</section>
+
+<!-- Contenido principal -->
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Banco de Expertos</h4>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr class="bg-primary text-white">
+                        <th scope="col">Id Experto</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (results && results.rows) { %>
+                        <% results.rows.forEach((row) => { %>
+                            <tr>
+                                <td><%= row.id_experto %></td>
+                                <td><a href="#" onclick="showInfoModal('<%= row.id_experto %>')"><%= row.nombre %></a></td>
+                                <td><%= row.descripcion %></td>
+                                <td><%= row.especialidad %></td>
+                                <td><%= row.rol %></td>
+                                <td><%= row.email %></td>
+                                <td>
+                                    <button class="btn btn-outline-info" onclick="showUpdateExpertModal('<%= row.id_experto %>')">Editar</button>
+                                    <button class="btn btn-outline-danger" onclick="showDeleteExpertModal('<%= row.id_experto %>')">Borrar</button>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="7">No hay expertos disponibles</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para actualizar experto -->
+<div class="modal fade modal-full-width" id="updateExpertModal" tabindex="-1" aria-labelledby="updateExpertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content modal-small-text">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateExpertModalLabel">Actualizar Experto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateExpertForm" action="/indexexpert/update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="update_id_experto" name="id_experto">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="update_nombre" class="form-label">Nombre</label>
+                                <input type="text" id="update_nombre" name="nombre" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_descripcion" class="form-label">Descripción Corta</label>
+                                <input type="text" id="update_descripcion" name="descripcion" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_especialidad" class="form-label">Especialidad</label>
+                                <input type="text" id="update_especialidad" name="especialidad" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_rol" class="form-label">Rol</label>
+                                <input type="text" id="update_rol" name="rol" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="update_email" class="form-label">Email</label>
+                                <input type="email" id="update_email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_descripcion_detallada" class="form-label">Descripción Detallada</label>
+                                <textarea id="update_descripcion_detallada" name="descripcion_detallada" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_telefono_contacto" class="form-label">Teléfono de Contacto</label>
+                                <input type="text" id="update_telefono_contacto" name="telefono_contacto" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_foto" class="form-label">Foto</label>
+                                <input type="file" id="update_foto" name="foto" class="form-control" accept="image/*">
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_estado" class="form-label">Estado</label>
+                                <select id="update_estado" name="estado" class="form-control" required>
+                                    <option value="true">Activo</option>
+                                    <option value="false">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="deleteExpertModal" tabindex="-1" aria-labelledby="deleteExpertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteExpertModalLabel">Confirmar eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este experto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <a id="confirmDeleteBtn" class="btn btn-danger" href="#">Eliminar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal para crear Experto -->
+<div class="modal fade modal-full-width" id="createExpertModal" tabindex="-1" aria-labelledby="createExpertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createExpertModalLabel">Crear Experto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createExpertForm" action="/indexexpert/save" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción Corta</label>
+                                <input type="text" id="descripcion" name="descripcion" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="especialidad" class="form-label">Especialidad</label>
+                                <input type="text" id="especialidad" name="especialidad" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rol" class="form-label">Rol</label>
+                                <input type="text" id="rol" name="rol" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion_detallada" class="form-label">Descripción Detallada</label>
+                                <textarea id="descripcion_detallada" name="descripcion_detallada" class="form-control" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono_contacto" class="form-label">Teléfono de Contacto</label>
+                                <input type="text" id="telefono_contacto" name="telefono_contacto" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="foto" class="form-label">Foto</label>
+                                <input type="file" id="foto" name="foto" class="form-control" accept="image/*" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select id="estado" name="estado" class="form-control" required>
+                                    <option value="true">Activo</option>
+                                    <option value="false">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal para información detallada del experto -->
+<div class="modal fade modal-full-width" id="infoExpertModal" tabindex="-1" aria-labelledby="infoExpertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content modal-small-text">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoExpertModalLabel">Detalle del Experto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img id="infoFoto" src="" alt="Foto del Experto" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-12">
+                            <p><strong>Nombre:</strong> <span id="infoNombre"></span></p>
+                            <p><strong>Descripción Corta:</strong> <span id="infoDescripcion"></span></p>
+                            <p><strong>Descripción Detallada:</strong> <span id="infoDescripcionDetallada"></span></p>
+                            <p><strong>Especialidad:</strong> <span id="infoEspecialidad"></span></p>
+                            <p><strong>Rol:</strong> <span id="infoRol"></span></p>
+                            <p><strong>Email:</strong> <span id="infoEmail"></span></p>
+                            <p><strong>Teléfono de Contacto:</strong> <span id="infoTelefonoContacto"></span></p>
+                            <p>
+                                <strong>Estado:</strong> 
+                                <span id="infoEstado"></span>
+                                <span id="estadoIcono" class="estado-icono"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para eliminar experto -->
+<div class="modal fade" id="deleteExpertModal" tabindex="-1" aria-labelledby="deleteExpertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteExpertModalLabel">Eliminar Experto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este experto?</p>
+                <form id="deleteExpertForm" action="indexexpert//delete" method="post">
+                    <input type="hidden" id="deleteIdExperto" name="id_experto">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/scripts/scriptsexpert.js"></script>
+</body>
+<footer>
+    <div class="footer-content container d-flex justify-content-between align-items-center">
+        <div class="footer-left d-flex align-items-center">
+            <img src="imags/logo-aim.png" alt="Logo" class="footer-logo">
+            <p class="mb-0 ml-3">Acreditación Institucional Multicampus de Alta Calidad</p>
+        </div>
+        <div class="footer-right text-right">
+            <h5 class="mb-1">Sedes</h5>
+            <p class="mb-0">Medellín: Carrera 56C Nº 51-110</p>
+            <p class="mb-0">Bello: Calle 45 Nº 61-40 Barrio Salento</p>
+            <p class="mb-0">Notificaciones judiciales: <a href="mailto:notificaciones.judiciales@usbmed.edu.co">notificaciones.judiciales@usbmed.edu.co</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom text-center mt-3">
+        <p class="mb-0">&copy; 2023 Universidad de San Buenaventura, Sede Medellín - Políticas de privacidad - Términos y Condiciones</p>
+        <p class="mb-0">Institución de educación superior sujeta a la inspección y vigilancia del Ministerio de Educación Nacional</p>
+    </div>
+</footer>
+
+
+</html>
