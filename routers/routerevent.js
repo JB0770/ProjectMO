@@ -5,6 +5,18 @@ const crud = require('../controllers/controllerevento');
 
 routerevent.post('/saveevent', crud.saveevent);
 
+
+function isAuthorized(roles) {
+  return (req, res, next) => {
+      if (req.session.usuario && roles.includes(req.session.usuario.rol)) {
+          next();
+      } else {
+          res.status(403).send('<script>alert("Acceso denegado"); window.location.href = "/";</script>');
+      }
+  };
+}
+
+
 routerevent.get('/', async (req, res) => {
   try {
     const results = await client.query('SELECT * FROM evento');
@@ -36,7 +48,7 @@ routerevent.get('/updateevent/:id_evento', async (req, res) => {
 
 routerevent.post('/updateevent/:id_evento', crud.updateevent);
 
-routerevent.get('/deleteevent/:id_evento', async (req, res) => {
+routerevent.get('/deleteevent/:id_evento', isAuthorized(['Administrador']),async (req, res) => {
   try {
     const id_evento = req.params.id_evento;
     await client.query('DELETE FROM evento WHERE id_evento=$1', [id_evento]);

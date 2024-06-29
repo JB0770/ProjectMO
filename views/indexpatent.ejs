@@ -290,9 +290,45 @@
     }
 }
 
+.user-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 1000; /* Asegura que esté delante de otros elementos */
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+
+
+        .user-info button {
+            background-color: #df6706;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .user-info button:hover {
+            background-color: #b55304;}
+
+
   </style>
 </head>
 <body>
+
+  <div class="user-info">
+    <% if (usuario) { %>
+        <span></span>
+        <form action="/logout" method="post"  ">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    <% } %>
+</div>
 
 <!-- Modal Interactivo para Solicitar una Patente -->
 <div class="modal fade" id="patentStepsModal" tabindex="-1" aria-labelledby="patentStepsModalLabel" aria-hidden="true">
@@ -461,7 +497,9 @@
                         <div class="btn-group">
                           <button class="btn btn-sm btn-outline-secondary" onclick="showEditModal('<%= patente.idpatente %>')">Editar</button>
                           <button class="btn btn-sm btn-outline-secondary" onclick="showDetailModal('<%= patente.idpatente %>')">Ver Detalles</button>
+                          <% if (usuario && (usuario.rol === 'Administrador' )) { %>
                           <button class="btn btn-sm btn-outline-secondary" onclick="showDeleteModal('<%= patente.idpatente %>')">Eliminar</button>
+                        <% } %>
                         </div>
                       </div>
                     </div>

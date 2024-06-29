@@ -354,12 +354,46 @@
     height:150px; /* Cambia esto al tamaño deseado */
     margin-right: 15px;
 }
+
+.user-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 1000; /* Asegura que esté delante de otros elementos */
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+
+
+        .user-info button {
+            background-color: #df6706;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .user-info button:hover {
+            background-color: #b55304;}
+
         
         </style>
     
 </head>
 <body>
-
+    <div class="user-info">
+        <% if (usuario) { %>
+            <span></span>
+            <form action="/logout" method="post"  ">
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        <% } %>
+    </div>
 
 <div class="modal fade" id="expertStepsModal" tabindex="-1" aria-labelledby="expertStepsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -469,7 +503,9 @@
         <div class="mx-auto text-center">
             <h1 class="jumbotron-heading">Expertos</h1>
             <p class="jumbotron-subtitle">El Experto indicado para su proyecto </p>
+            <% if (usuario && (usuario.rol === 'Administrador' || usuario.rol === 'Experto')) { %>
             <button class="btn btn-primary" onclick="showCreateExpertModal()">Crear Experto</button>
+            <% } %>
         </div>
     </div>
 </section>
@@ -502,8 +538,10 @@
                                 <td><%= row.rol %></td>
                                 <td><%= row.email %></td>
                                 <td>
+                                    <% if (usuario && (usuario.rol === 'Administrador' || usuario.rol === 'Experto')) { %>
                                     <button class="btn btn-outline-info" onclick="showUpdateExpertModal('<%= row.id_experto %>')">Editar</button>
                                     <button class="btn btn-outline-danger" onclick="showDeleteExpertModal('<%= row.id_experto %>')">Borrar</button>
+                                    <% } %>
                                 </td>
                             </tr>
                         <% }); %>

@@ -244,6 +244,14 @@ footer {
 </head>
 
 <body>
+    <div class="user-info">
+        <% if (usuario) { %>
+            <span><%= usuario.nombre %> (<%= usuario.rol %>)</span>
+            <form action="/logout" method="post" style="display:inline;">
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        <% } %>
+    </div>
 
     <div class="sidebar">
         <div class="dropdown">
@@ -318,6 +326,16 @@ footer {
                 <button onclick="window.location.href='/indexpatent'">Ver más</button>
             </div>
         </div>
+        <% if (usuario && usuario.rol === 'Administrador') { %>
+            <div class="card">
+                <div>
+                    <img src="imags/imagadmin.jpg" alt="Admin Icon" class="logo" style="height: 120px;">
+                </div>
+                <h3>Gestión de Usuarios</h3>
+                <p>Administra los usuarios del sistema.</p>
+                <button onclick="window.location.href='/users'">Ver más</button>
+            </div>
+        <% } %>
     </div>
 </body>
 <footer>
